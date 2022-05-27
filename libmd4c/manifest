@@ -1,13 +1,16 @@
 : 1
 name: libmd4c
-version: 0.1.0-a.0.z
+version: 0.4.8-a.0.z
 project: md4c
-summary: md4c C library
-license: other: proprietary ; Not free/open source.
+summary: Markdown parser C library
+license: MIT
 description-file: README.md
-url: https://example.org/md4c
-email: francois@codesynthesis.com
-#build-error-email: francois@codesynthesis.com
+changes-file: CHANGELOG.md
+url: https://github.com/mity/md4c
+src-url: https://github.com/mity/md4c
+doc-url: https://github.com/mity/md4c/wiki
+package-url: https://github.com/build2-packaging/md4c
+package-email: packaging@build2.org ; Mailing list.
+build-error-email: builds@build2.org
 depends: * build2 >= 0.14.0
 depends: * bpkg >= 0.14.0
-#depends: libhello ^1.0.0

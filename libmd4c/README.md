@@ -1,3 +1,1 @@
-# libmd4c
-
-C library
+../upstream/README.md
