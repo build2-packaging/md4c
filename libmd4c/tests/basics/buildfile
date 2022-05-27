@@ -1,3 +1,5 @@
-import libs = libmd4c%lib{md4c}
+import libs      = libmd4c%lib{md4c}
+import libs_html = libmd4c%lib{md4c-html}
 
-exe{driver}: {h c}{**} $libs testscript{**}
+./: exe{driver}:      c{driver}      $libs
+./: exe{driver-html}: c{driver-html} $libs_html
