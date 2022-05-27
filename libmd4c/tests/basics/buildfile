@@ -1,0 +1,3 @@
+import libs = libmd4c%lib{md4c}
+
+exe{driver}: {h c}{**} $libs testscript{**}

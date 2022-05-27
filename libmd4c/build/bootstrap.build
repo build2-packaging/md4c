@@ -1,0 +1,7 @@
+project = libmd4c
+
+using version
+using config
+using test
+using install
+using dist

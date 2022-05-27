@@ -1,0 +1,13 @@
+: 1
+name: libmd4c
+version: 0.1.0-a.0.z
+project: md4c
+summary: md4c C library
+license: other: proprietary ; Not free/open source.
+description-file: README.md
+url: https://example.org/md4c
+email: francois@codesynthesis.com
+#build-error-email: francois@codesynthesis.com
+depends: * build2 >= 0.14.0
+depends: * bpkg >= 0.14.0
+#depends: libhello ^1.0.0
