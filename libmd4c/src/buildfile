@@ -1,38 +1,34 @@
-intf_libs = # Interface dependencies.
-impl_libs = # Implementation dependencies.
-#import xxxx_libs += libhello%lib{hello}
+./: lib{md4c}:      libul{md4c}:      {h c}{md4c}
+./: lib{md4c-html}: libul{md4c-html}: {h c}{md4c-html entity} lib{md4c}
 
-lib{md4c}: {h c}{** -version} h{version} $impl_libs $intf_libs
-
-# Include the generated version header into the distribution (so that we don't
-# pick up an installed one) and don't remove it when cleaning in src (so that
-# clean results in a state identical to distributed).
+# Export all symbols from the DLL if on Windows.
 #
-h{version}: in{version} $src_root/manifest
-{
-  dist  = true
-  clean = ($src_root != $out_root)
-}
+libs{md4c}:      def{md4c}:      include = ($c.target.system == 'win32-msvc')
+libs{md4c-html}: def{md4c-html}: include = ($c.target.system == 'win32-msvc')
 
-h{export}@./: c.importable = false
+def{md4c}:      libul{md4c}
+def{md4c-html}: libul{md4c-html}
+
+if ($c.target.system == 'mingw32')
+  c.loptions += -Wl,--export-all-symbols
 
 # Build options.
 #
-c.poptions =+ "-I$out_root" "-I$src_root"
+c.poptions =+ -DMD_VERSION_MAJOR="$version.major"   \
+              -DMD_VERSION_MINOR="$version.minor"   \
+              -DMD_VERSION_RELEASE="$version.patch" \
 
-{hbmia obja}{*}: c.poptions += -DSRC_STATIC_BUILD
-{hbmis objs}{*}: c.poptions += -DSRC_SHARED_BUILD
+if $config.libmd4c.debug
+  c.poptions += -DDEBUG
+
+if ($c.class == 'msvc')
+  c.poptions += -D_CRT_SECURE_NO_WARNINGS
+
+obj{md4c}: c.poptions += -DMD4C_USE_UTF8
 
 # Export options.
 #
-lib{md4c}:
-{
-  c.export.poptions = "-I$out_root" "-I$src_root"
-  c.export.libs = $intf_libs
-}
-
-liba{md4c}: c.export.poptions += -DSRC_STATIC
-libs{md4c}: c.export.poptions += -DSRC_SHARED
+lib{md4c md4c-html}: c.export.poptions = "-I$src_base"
 
 # For pre-releases use the complete version to make sure they cannot be used
 # in place of another pre-release or the final version. See the version module
@@ -43,11 +39,7 @@ if $version.pre_release
 else
   lib{md4c}: bin.lib.version = "-$version.major.$version.minor"
 
-# Install into the src/ subdirectory of, say, /usr/include/
-# recreating subdirectories.
+# Install public headers directly into, say, /usr/include/.
 #
-h{*}:
-{
-  install         = include/src/
-  install.subdirs = true
-}
+h{entity}@./: install = false
+h{*}:         install = include/
