@@ -35,11 +35,11 @@ lib{md4c md4c-html}: c.export.poptions = "-I$src_base"
 # for details on the version.* variable values.
 #
 if $version.pre_release
-  lib{md4c}: bin.lib.version = "-$version.project_id"
+  lib{md4c md4c-html}: bin.lib.version = "-$version.project_id"
 else
-  lib{md4c}: bin.lib.version = "-$version.major.$version.minor"
+  lib{md4c md4c-html}: bin.lib.version = "-$version.major.$version.minor"
 
 # Install public headers directly into, say, /usr/include/.
 #
-h{entity}@./: install = false
-h{*}:         install = include/
+h{md4c}@./ h{md4c-html}@./: install = include/
+h{*}: install = false
