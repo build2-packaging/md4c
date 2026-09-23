@@ -12,5 +12,5 @@ doc-url: https://github.com/mity/md4c/wiki
 package-url: https://github.com/build2-packaging/md4c
 package-email: packaging@build2.org ; Mailing list.
 build-error-email: builds@build2.org
-depends: * build2 >= 0.14.0
-depends: * bpkg >= 0.14.0
+depends: * build2 >= 0.18.0
+depends: * bpkg >= 0.18.0
