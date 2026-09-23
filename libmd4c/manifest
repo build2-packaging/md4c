@@ -5,6 +5,7 @@ project: md4c
 summary: Markdown parser C library
 license: MIT
 description-file: README.md
+package-description-file: PACKAGE-README.md
 changes-file: CHANGELOG.md
 url: https://github.com/mity/md4c
 src-url: https://github.com/mity/md4c
