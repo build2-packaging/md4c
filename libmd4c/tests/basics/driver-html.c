@@ -16,7 +16,7 @@ process_output (const MD_CHAR* data, MD_SIZE size, void* userdata)
 }
 
 int
-main ()
+main (void)
 {
   const char* md = "**Hello World**";
   if (md_html (md, strlen (md), process_output, NULL, 0, 0) != 0)

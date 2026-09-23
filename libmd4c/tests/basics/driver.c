@@ -39,7 +39,7 @@ text (MD_TEXTTYPE type, const MD_CHAR* text, MD_SIZE size, void* userdata)
 }
 
 int
-main ()
+main (void)
 {
   MD_PARSER callbacks = {0, 0, block, block, span, span, text, NULL, NULL};
   const char* md = "**Hello World**";
