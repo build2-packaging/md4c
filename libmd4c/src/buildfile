@@ -29,6 +29,7 @@ obj{md4c}: c.poptions += -DMD4C_USE_UTF8
 # Export options.
 #
 lib{md4c md4c-html}: c.export.poptions = "-I$src_base"
+lib{md4c-html}: c.export.libs = lib{md4c}
 
 # For pre-releases use the complete version to make sure they cannot be used
 # in place of another pre-release or the final version. See the version module
