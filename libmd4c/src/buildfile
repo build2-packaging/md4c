@@ -14,17 +14,11 @@ if ($c.target.system == 'mingw32')
 
 # Build options.
 #
-c.poptions =+ -DMD_VERSION_MAJOR="$version.major"   \
-              -DMD_VERSION_MINOR="$version.minor"   \
-              -DMD_VERSION_RELEASE="$version.patch" \
-
 if $config.libmd4c.debug
   c.poptions += -DDEBUG
 
 if ($c.class == 'msvc')
   c.poptions += -D_CRT_SECURE_NO_WARNINGS
-
-obj{md4c}: c.poptions += -DMD4C_USE_UTF8
 
 # Export options.
 #
