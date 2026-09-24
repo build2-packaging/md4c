@@ -45,7 +45,27 @@ It links `lib{md4c}`.
 This package provides the following configuration variables:
 
 ```
-[bool] config.libmd4c.debug ?= false
+[bool]   config.libmd4c.debug    ?= false
+[string] config.libmd4c.encoding ?= 'utf8'
 ```
 
-If true, compile with `-DDEBUG`.
+If `config.libmd4c.debug` is true, compile with `-DDEBUG`.
+
+`config.libmd4c.encoding` selects the input encoding the parser expects:
+
+* `utf8`: UTF-8 input (default).
+
+* `ascii`: ASCII-only input. Non-ASCII whitespace and punctuation are not
+  recognized as such, and link reference matching is case-insensitive only
+  for ASCII letters.
+
+* `utf16`: UTF-16 input, with `MD_CHAR` defined as `WCHAR`. This is only
+  supported on Windows. It changes the types in `<md4c.h>`, so
+  `MD4C_USE_UTF16` is also defined for consumers of `lib{md4c}`. The HTML
+  renderer does not support it, so `lib{md4c-html}` is not available.
+
+A dependent can request a specific encoding in its `manifest`, for example:
+
+```
+depends: libmd4c ^0.6.0 { require { config.libmd4c.encoding = 'ascii' } }
+```

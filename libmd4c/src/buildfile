@@ -1,5 +1,6 @@
 ./: lib{md4c}:      libul{md4c}:      {h c}{md4c}
-./: lib{md4c-html}: libul{md4c-html}: {h c}{md4c-html entity} lib{md4c}
+./: lib{md4c-html}: include = ($config.libmd4c.encoding != 'utf16')
+lib{md4c-html}: libul{md4c-html}: {h c}{md4c-html entity} lib{md4c}
 
 # Export all symbols from the DLL if on Windows.
 #
@@ -20,10 +21,31 @@ if $config.libmd4c.debug
 if ($c.class == 'msvc')
   c.poptions += -D_CRT_SECURE_NO_WARNINGS
 
+switch $config.libmd4c.encoding
+{
+  case 'ascii'
+    c.poptions += -DMD4C_USE_ASCII
+  case 'utf16'
+    c.poptions += -DMD4C_USE_UTF16
+}
+
 # Export options.
 #
 lib{md4c md4c-html}: c.export.poptions = "-I$src_base"
 lib{md4c-html}: c.export.libs = lib{md4c}
+
+# MD4C_USE_UTF16 changes the types in md4c.h.
+#
+if ($config.libmd4c.encoding == 'utf16')
+  lib{md4c}: c.export.poptions += -DMD4C_USE_UTF16
+
+# Metadata.
+#
+lib{md4c}:
+{
+  export.metadata = 1 libmd4c
+  libmd4c.encoding = [string] $config.libmd4c.encoding
+}
 
 # For pre-releases use the complete version to make sure they cannot be used
 # in place of another pre-release or the final version. See the version module

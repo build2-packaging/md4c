@@ -14,3 +14,18 @@ test.target = $c.target
 # If true, compile with -DDEBUG.
 #
 config [bool] config.libmd4c.debug ?= false
+
+# Input encoding: utf8 (default), ascii (ASCII only, no Unicode-specific
+# code), or utf16 (Windows only, WCHAR-based API, no lib{md4c-html}).
+#
+config [string] config.libmd4c.encoding ?= 'utf8'
+
+if ($config.libmd4c.encoding == 'utf16')
+{
+  if ($c.target.class != 'windows')
+    fail "config.libmd4c.encoding=utf16 is only supported on Windows"
+}
+elif ($config.libmd4c.encoding != 'utf8' && \
+      $config.libmd4c.encoding != 'ascii')
+  fail "invalid config.libmd4c.encoding value '$config.libmd4c.encoding', \
+expected utf8, ascii, or utf16"

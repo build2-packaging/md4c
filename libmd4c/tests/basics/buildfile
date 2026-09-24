@@ -1,5 +1,11 @@
+import! [metadata, rule_hint=c.link] md4c = libmd4c%lib{md4c}
+
 import libs      = libmd4c%lib{md4c}
 import libs_html = libmd4c%lib{md4c-html}
 
-./: exe{driver}:      c{driver}      $libs
-./: exe{driver-html}: c{driver-html} $libs_html
+./: exe{driver}: c{driver} $libs
+
+# The HTML renderer does not support UTF-16.
+#
+./: exe{driver-html}: include = ($($md4c: libmd4c.encoding) != 'utf16')
+exe{driver-html}: c{driver-html} $libs_html

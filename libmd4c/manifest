@@ -15,3 +15,6 @@ package-email: packaging@build2.org ; Mailing list.
 build-error-email: builds@build2.org
 depends: * build2 >= 0.18.0
 depends: * bpkg >= 0.18.0
+ascii-build-config: config.libmd4c.encoding=ascii ; ASCII-only input.
+utf16-builds: windows ; UTF-16 is only supported on Windows.
+utf16-build-config: config.libmd4c.encoding=utf16 ; UTF-16 (WCHAR) input.
