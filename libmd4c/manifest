@@ -1,6 +1,6 @@
 : 1
 name: libmd4c
-version: 0.6.0-a.0.z
+version: 0.6.0
 project: md4c
 summary: Markdown parser C library
 license: MIT
