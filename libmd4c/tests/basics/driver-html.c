@@ -19,7 +19,7 @@ int
 main (void)
 {
   const char* md = "**Hello World**";
-  if (md_html (md, strlen (md), process_output, NULL, 0, 0) != 0)
+  if (md_html (md, (MD_SIZE) strlen (md), process_output, NULL, 0, 0) != 0)
     return 1;
 
   return 0;

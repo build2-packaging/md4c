@@ -52,7 +52,7 @@ main (void)
 {
   MD_PARSER callbacks = {0, 0, block, block, span, span, text, NULL, NULL};
   const MD_CHAR* md = MD_TEXT ("**Hello World**");
-  if (md_parse (md, md_strlen (md), &callbacks, NULL) != 0)
+  if (md_parse (md, (MD_SIZE) md_strlen (md), &callbacks, NULL) != 0)
     return 1;
 
   return 0;
